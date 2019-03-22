@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ad-xh-impl" />
+        <module name="ad-xh-service" />
+        <module name="xh-ad" />
+        <module name="xh-ad-impl" />
+        <module name="xh-ad-parent" />
+        <module name="xh-ad-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ad-xh-impl" target="7" />
+      <module name="ad-xh-service" target="7" />
+      <module name="xh-ad" target="7" />
+      <module name="xh-ad-group" target="7" />
+      <module name="xh-ad-impl" target="7" />
+      <module name="xh-ad-parent" target="7" />
+      <module name="xh-ad-service" target="7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="123" />
+        <module name="ad-module-impl" />
+        <module name="ad-module-service" />
+        <module name="ad-service-interface" />
+        <module name="ad-service-parent" />
+        <module name="admoduleimpl" />
+        <module name="admoduleservice" />
+        <module name="adserviceparent" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="123" target="7" />
+      <module name="ad-module-impl" target="7" />
+      <module name="ad-module-service" target="7" />
+      <module name="ad-service" target="7" />
+      <module name="ad-service-interface" target="7" />
+      <module name="ad-service-parent" target="7" />
+      <module name="admoduleimpl" target="7" />
+      <module name="admoduleservice" target="7" />
+      <module name="adserviceparent" target="7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

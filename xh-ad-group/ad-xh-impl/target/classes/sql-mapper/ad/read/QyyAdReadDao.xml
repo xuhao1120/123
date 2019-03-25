@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xh.ad.dao.read.QyyAdReadDao">
+
+	<resultMap id="BaseResultMap" type="cn.xh.ad.entity.QyyAd" >
+		<id column="ad_id" property="adId" jdbcType="INTEGER" />
+		<result column="ad_parent_id" property="adParentId" jdbcType="INTEGER" />
+		<result column="ad_type" property="adType" jdbcType="INTEGER" />
+		<result column="ad_name" property="adName" jdbcType="VARCHAR" />
+		<result column="ad_desc" property="adDesc" jdbcType="VARCHAR" />
+		<result column="ref_id" property="refId" jdbcType="INTEGER" />
+		<result column="ref_content" property="refContent" jdbcType="VARCHAR" />
+		<result column="ad_link_url" property="adLinkUrl" jdbcType="VARCHAR" />
+		<result column="ad_start_time" property="adStartTime" jdbcType="DATE" />
+		<result column="ad_end_time" property="adEndTime" jdbcType="DATE" />
+		<result column="ad_pic" property="adPic" jdbcType="VARCHAR" />
+		<result column="ad_order" property="adOrder" jdbcType="INTEGER" />
+		<result column="ad_status" property="adStatus" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="create_user" property="createUser" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+		ad_id, ad_parent_id, ad_type, ad_name, ad_desc, ref_id, ref_content, ad_link_url, ad_start_time,
+		ad_end_time, ad_pic, ad_order, ad_status, create_time, create_user, update_time, update_user
+	</sql>
+
+	<select id="findQyyAdById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+		select
+			<include refid="Base_Column_List" />
+		from qyy_ad
+			where ad_id = #{adId,jdbcType=INTEGER}
+	</select>
+
+	<select id="listByPage" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from qyy_ad
+		<where>
+			<if test="qyyAdQuery != null" >
+				<if test="qyyAdQuery.adParentId != null" >
+					and ad_parent_id = #{qyyAdQuery.adParentId}
+				</if>
+				<if test="qyyAdQuery.adName != null and qyyAdQuery.adName != '' " >
+					and ad_name like concat("%",concat(#{qyyAdQuery.adName},"%"))
+				</if>
+				<if test="qyyAdQuery.startTime != null " >
+					and start_time <![CDATA[ >= ]]> #{qyyAdQuery.startTime}
+				</if>
+			</if>
+		</where>
+		<if test="pageSize != null and start != null" >
+			LIMIT ${start},${pageSize}
+		</if>
+	</select>
+
+	<select id="countByPage" resultType="java.lang.Integer">
+		select
+			count(*)
+		from mph_group_buy
+		<where>
+			<if test="qyyAdQuery != null" >
+				<if test="qyyAdQuery.adParentId != null" >
+					and ad_parent_id = #{qyyAdQuery.adParentId}
+				</if>
+				<if test="qyyAdQuery.adName != null and qyyAdQuery.adName != '' " >
+					and ad_name like concat("%",concat(#{qyyAdQuery.adName},"%"))
+				</if>
+				<if test="qyyAdQuery.startTime != null " >
+					and start_time <![CDATA[ >= ]]> #{qyyAdQuery.startTime}
+				</if>
+			</if>
+		</where>
+	</select>
+
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="dsCbsRead" class="${prop.jdbc.datasource}" init-method="init" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+ 		<property name="url" value="${prop.jdbc.cbs.read.url}" />
+ 		<property name="username" value="${prop.jdbc.cbs.read.username}" />
+ 		<property name="password" value="${prop.jdbc.cbs.read.password}" />
+		
+		<property name="initialSize" value="${prop.jdbc.default.pool.initialSize}"/>
+        <property name="minIdle" value="${prop.jdbc.default.pool.minIdle}"/>
+        <property name="maxActive" value="${prop.jdbc.default.pool.maxActive}"/>
+        <property name="maxWait" value="${prop.jdbc.default.pool.maxWait}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${prop.jdbc.default.pool.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${prop.jdbc.default.pool.minEvictableIdleTimeMillis}"/>
+
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <property name="filters" value="stat"/>
+	</bean>
+	
+	<bean id="dsCbsWrite" class="${prop.jdbc.datasource}" init-method="init" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+ 		<property name="url" value="${prop.jdbc.cbs.write.url}" /> 
+ 		<property name="username" value="${prop.jdbc.cbs.write.username}" /> 
+ 		<property name="password" value="${prop.jdbc.cbs.write.password}" />
+ 		
+		<property name="initialSize" value="${prop.jdbc.default.pool.initialSize}"/>
+        <property name="minIdle" value="${prop.jdbc.default.pool.minIdle}"/>
+        <property name="maxActive" value="${prop.jdbc.default.pool.maxActive}"/>
+        <property name="maxWait" value="${prop.jdbc.default.pool.maxWait}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${prop.jdbc.default.pool.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${prop.jdbc.default.pool.minEvictableIdleTimeMillis}"/>
+
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <property name="filters" value="stat"/>
+	</bean>
+	
+	
+	<!--只读 CbsSqlSessionFactory配置  -->
+	<bean id="readCbsSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="mapperLocations" value="classpath*:sql-mapper/**/read/**/*.xml" />
+		<property name="dataSource" ref="dsCbsRead" />
+	</bean>
+	<!--readCbsMapperScanner Dao扫描配置 -->
+	<bean id="readCbsMapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.xh.*.dao.read" />
+		<property name="sqlSessionFactoryBeanName" value="readCbsSqlSessionFactory" />
+	</bean>
+	
+
+	<!--读写 CbsSqlSessionFactory配置  -->
+	<bean id="writeCbsSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="mapperLocations" value="classpath*:sql-mapper/**/write/**/*.xml" />
+		<property name="dataSource" ref="dsCbsWrite" />
+	</bean>
+	<!--writeCbsMapperScanner Dao扫描配置 -->
+	<bean id="writeCbsMapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.xh.*.dao.write" />
+		<property name="sqlSessionFactoryBeanName" value="writeCbsSqlSessionFactory" />
+	</bean>
+
+
+	<!-- CBS transactionManager事务 -->
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dsCbsWrite" />
+	</bean>
+	
+</beans>

@@ -12,6 +12,13 @@
 
 	<artifactId>xh-ad-impl</artifactId>
 	<dependencies>
+
+		<dependency>
+			<groupId>cn.xh</groupId>
+			<artifactId>xh-ad-service</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.mph.coreapi</groupId>
 			<artifactId>dubbo-bin</artifactId>
@@ -160,6 +167,12 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.12</version>
+		</dependency>
+
 	</dependencies>
 
 </project>

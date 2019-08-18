@@ -185,4 +185,27 @@ public class QyyAd implements Serializable{
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
+
+    @Override
+    public String toString() {
+        return "QyyAd{" +
+                "adId=" + adId +
+                ", adParentId=" + adParentId +
+                ", adType=" + adType +
+                ", adName='" + adName + '\'' +
+                ", adDesc='" + adDesc + '\'' +
+                ", refId=" + refId +
+                ", refContent='" + refContent + '\'' +
+                ", adLinkUrl='" + adLinkUrl + '\'' +
+                ", adStartTime=" + adStartTime +
+                ", adEndTime=" + adEndTime +
+                ", adPic='" + adPic + '\'' +
+                ", adOrder=" + adOrder +
+                ", adStatus=" + adStatus +
+                ", createTime=" + createTime +
+                ", createUser='" + createUser + '\'' +
+                ", updateTime=" + updateTime +
+                ", updateUser='" + updateUser + '\'' +
+                '}';
+    }
 }

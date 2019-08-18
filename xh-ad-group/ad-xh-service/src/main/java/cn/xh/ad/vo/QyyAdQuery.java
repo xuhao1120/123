@@ -23,6 +23,5 @@ public class QyyAdQuery implements Serializable {
     private Date startTime;
 
     private String password;
-
-    private Integer age;
-}
+    private String userName;
+    private Integer age;}

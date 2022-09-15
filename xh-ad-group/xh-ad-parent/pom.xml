@@ -29,7 +29,7 @@
 		<cglib.version>2.1_3</cglib.version>
 		<junit.version>4.12</junit.version>
 
-		<version.yaml>1.14</version.yaml>
+		<version.yaml>1.31</version.yaml>
 	</properties>
 
 
